@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ارتباط با مدیر - وبسایت سیپان</title>
+    <style>
+        /* استایل دهی عمومی */
+        @import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;700&display=swap');
+        
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --accent-color: #16a085;
+            --text-color: #333;
+            --light-bg: #f8f9fa;
+            --card-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            --hover-effect: all 0.3s ease;
+        }
+        
+        body {
+            font-family: 'Vazirmatn', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.8;
+            margin: 0;
+            padding: 0;
+            background-color: var(--light-bg);
+            color: var(--text-color);
+        }
+
+        /* هدر */
+        .hero {
+            position: relative;
+            height: 50vh;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            margin-bottom: 2rem;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.3));
+            z-index: 1;
+        }
+        
+        .hero-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: 0;
+            transition: transform 10s ease;
+        }
+        
+        .hero:hover .hero-image {
+            transform: scale(1.05);
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+            padding: 0 2rem;
+        }
+
+        /* نوار ناوبری */
+        nav {
+            background-color: var(--primary-color);
+            padding: 1rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            transition: var(--hover-effect);
+        }
+
+        nav a:hover {
+            background-color: rgba(255,255,255,0.2);
+            transform: translateY(-2px);
+        }
+
+        /* منوی آبشاری */
+        nav ul li {
+            position: relative;
+        }
+        
+        nav ul ul {
+            display: none;
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background-color: var(--primary-color);
+            min-width: 200px;
+            border-radius: 0 0 8px 8px;
+            box-shadow: var(--card-shadow);
+            padding: 0.5rem 0;
+        }
+        
+        nav ul li:hover > ul {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+        
+        nav ul ul li {
+            padding: 0.5rem 0;
+        }
+        
+        nav ul ul a {
+            display: block;
+            padding: 0.5rem 1.5rem;
+        }
+        
+        nav ul ul a:hover {
+            background-color: rgba(255,255,255,0.1);
+        }
+
+        /* محتوای اصلی */
+        .main-content {
+            max-width: 800px;
+            margin: 3rem auto;
+            padding: 0 1.5rem;
+        }
+
+        /* کارت ارتباط */
+        .contact-card {
+            background-color: white;
+            border-radius: 12px;
+            padding: 2.5rem;
+            box-shadow: var(--card-shadow);
+            transition: var(--hover-effect);
+            border: 1px solid rgba(0,0,0,0.05);
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        
+        .contact-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+        }
+
+        /* آیکون‌ها */
+        .contact-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--accent-color);
+        }
+        
+        .contact-method {
+            margin: 2rem 0;
+        }
+        
+        .contact-method h3 {
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+        
+        .contact-link {
+            display: inline-block;
+            padding: 0.8rem 1.8rem;
+            background-color: var(--secondary-color);
+            color: white;
+            border-radius: 8px;
+            text-decoration: none;
+            transition: var(--hover-effect);
+            font-weight: 500;
+            margin-top: 1rem;
+            box-shadow: 0 4px 8px rgba(52, 152, 219, 0.3);
+        }
+        
+        .contact-link:hover {
+            background-color: #2980b9;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(52, 152, 219, 0.4);
+        }
+        
+        .instagram-link {
+            background: linear-gradient(45deg, #405DE6, #5851DB, #833AB4, #C13584, #E1306C, #FD1D1D);
+        }
+        
+        .instagram-link:hover {
+            background: linear-gradient(45deg, #3449b8, #4a43b8, #6f30a0, #a82a77, #c02863, #e01a1a);
+        }
+        
+        .phone-link {
+            background-color: var(--accent-color);
+        }
+        
+        .phone-link:hover {
+            background-color: #138a72;
+        }
+
+        /* متن سیپان */
+        .highlight {
+            color: #1abc9c;
+            font-weight: 700;
+            text-shadow: 0 2px 4px rgba(26, 188, 156, 0.3);
+        }
+
+        /* فوتر */
+        footer {
+            background-color: var(--primary-color);
+            color: white;
+            text-align: center;
+            padding: 2rem 1rem;
+            margin-top: 3rem;
+            position: relative;
+        }
+        
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, #1abc9c, #3498db);
+        }
+
+        /* انیمیشن‌ها */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        /* افکت‌های ویژه */
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(26, 188, 156, 0.7); }
+            70% { box-shadow: 0 0 0 10px rgba(26, 188, 156, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(26, 188, 156, 0); }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <div class="hero">
+        <img src="./static/cilo1.jpg" alt="منظره روستای کاپوت" class="hero-image">
+        <div class="hero-content">
+            <h1 style="font-size: 2.5rem; margin-bottom: 1rem;">ارتباط با مدیر <span class="highlight">سیپان</span></h1>
+            <p style="font-size: 1.2rem; max-width: 700px; margin: 0 auto;">برای ارتباط با مدیریت سایت می‌توانید از روش‌های زیر استفاده نمایید</p>
+        </div>
+    </div>
+
+    <nav>
+        <ul>
+            <li><a href="./index.html">خانه</a></li>
+            <li>
+                <a href="#">مدیریت سایت</a>
+                <ul>
+                    <li><a href="./contact.html">ارتباط با مدیر</a></li>
+                </ul>
+            </li>
+            <li><a href="./aboutus.html">درباره ما</a></li>
+        </ul>
+    </nav>
+
+    <div class="main-content">
+        <div class="contact-card">
+            <div class="contact-icon">
+                <i class="fas fa-headset"></i>
+            </div>
+            <h2>راه‌های ارتباط با مدیریت سایت</h2>
+            <p>برای پیگیری پیشنهادات، انتقادات و سایر موارد می‌توانید از طریق راه‌های زیر با ما در ارتباط باشید:</p>
+            
+            <div class="contact-method">
+                <h3>اینستاگرام</h3>
+                <p>ما را در اینستاگرام دنبال کنید و از آخرین اخبار روستای کاپوت باخبر شوید</p>
+                <a href="https://www.instagram.com/your_username" class="contact-link instagram-link" target="_blank">
+                    <i class="fab fa-instagram"></i> sipanxalat17@
+                </a>
+            </div>
+            
+            <div class="contact-method">
+                <h3>تماس تلفنی</h3>
+                <p>برای ارتباط مستقیم با مدیر سایت می‌توانید با شماره زیر تماس بگیرید:</p>
+                <a href="tel:+989123456789" class="contact-link phone-link">
+                    <i class="fas fa-phone"></i> 09900103389
+                </a>
+            </div>
+            
+            <div class="contact-method">
+                <h3>ساعات پاسخگویی</h3>
+                <p>شنبه تا چهارشنبه: 5 صبح تا 6 بعدازظهر<br>پنجشنبه: ۸ صبح تا ۱۲ ظهر</p>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>تمامی حقوق برای وبسایت کاپوت رنگین محفوظ است © 1404</p>
+    </footer>
+</body>
+</html>

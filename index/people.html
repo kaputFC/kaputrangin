@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>افراد مشهور - وبسایت سیپان</title>
+    <style>
+        /* استایل دهی عمومی */
+        @import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;700&display=swap');
+        
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --accent-color: #16a085;
+            --text-color: #333;
+            --light-bg: #f8f9fa;
+            --card-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            --hover-effect: all 0.3s ease;
+        }
+        
+        body {
+            font-family: 'Vazirmatn', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.8;
+            margin: 0;
+            padding: 0;
+            background-color: var(--light-bg);
+            color: var(--text-color);
+        }
+
+        /* هدر */
+        .hero {
+            position: relative;
+            height: 50vh;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            margin-bottom: 2rem;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.3));
+            z-index: 1;
+        }
+        
+        .hero-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: 0;
+            transition: transform 10s ease;
+        }
+        
+        .hero:hover .hero-image {
+            transform: scale(1.05);
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+            padding: 0 2rem;
+        }
+
+        /* نوار ناوبری */
+        nav {
+            background-color: var(--primary-color);
+            padding: 1rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            transition: var(--hover-effect);
+        }
+
+        nav a:hover {
+            background-color: rgba(255,255,255,0.2);
+            transform: translateY(-2px);
+        }
+
+        /* منوی آبشاری */
+        nav ul li {
+            position: relative;
+        }
+        
+        nav ul ul {
+            display: none;
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background-color: var(--primary-color);
+            min-width: 200px;
+            border-radius: 0 0 8px 8px;
+            box-shadow: var(--card-shadow);
+            padding: 0.5rem 0;
+        }
+        
+        nav ul li:hover > ul {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+        
+        nav ul ul li {
+            padding: 0.5rem 0;
+        }
+        
+        nav ul ul a {
+            display: block;
+            padding: 0.5rem 1.5rem;
+        }
+        
+        nav ul ul a:hover {
+            background-color: rgba(255,255,255,0.1);
+        }
+
+        /* محتوای اصلی */
+        .main-content {
+            max-width: 1200px;
+            margin: 3rem auto;
+            padding: 0 1.5rem;
+        }
+
+        /* عنوان صفحه */
+        .page-title {
+            text-align: center;
+            margin-bottom: 3rem;
+            position: relative;
+        }
+        
+        .page-title h2 {
+            font-size: 2.2rem;
+            color: var(--primary-color);
+            display: inline-block;
+            padding-bottom: 0.5rem;
+        }
+        
+        .page-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            right: 50%;
+            transform: translateX(50%);
+            width: 100px;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent-color), var(--secondary-color));
+            border-radius: 3px;
+        }
+
+        /* گالری افراد مشهور */
+        .famous-people {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+        
+        .person-card {
+            background-color: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: var(--card-shadow);
+            transition: var(--hover-effect);
+            animation: fadeInUp 0.6s ease;
+            position: relative;
+        }
+        
+        .person-card:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+        
+        .person-card:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+        
+        .person-card:nth-child(4) {
+            animation-delay: 0.6s;
+        }
+        
+        .person-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+        }
+        
+        .person-image {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            transition: var(--hover-effect);
+        }
+        
+        .person-card:hover .person-image {
+            transform: scale(1.05);
+        }
+        
+        .person-info {
+            padding: 1.5rem;
+            text-align: center;
+        }
+        
+        .person-name {
+            font-size: 1.4rem;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+        }
+        
+        .person-title {
+            color: var(--accent-color);
+            font-weight: 500;
+            margin-bottom: 1rem;
+        }
+        
+        .person-bio {
+            color: #666;
+            line-height: 1.6;
+        }
+        
+        .person-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to top, rgba(0,0,0,0.7), rgba(0,0,0,0.3));
+            opacity: 0;
+            transition: var(--hover-effect);
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            padding-bottom: 2rem;
+        }
+        
+        .person-card:hover .person-overlay {
+            opacity: 1;
+        }
+        
+        .overlay-text {
+            color: white;
+            text-align: center;
+            padding: 0 1rem;
+            transform: translateY(20px);
+            transition: var(--hover-effect);
+        }
+        
+        .person-card:hover .overlay-text {
+            transform: translateY(0);
+        }
+
+        /* فوتر */
+        footer {
+            background-color: var(--primary-color);
+            color: white;
+            text-align: center;
+            padding: 2rem 1rem;
+            margin-top: 3rem;
+            position: relative;
+        }
+        
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, #1abc9c, #3498db);
+        }
+
+        /* انیمیشن‌ها */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @keyframes fadeInUp {
+            from { 
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to { 
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* افکت‌های ویژه */
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(26, 188, 156, 0.7); }
+            70% { box-shadow: 0 0 0 10px rgba(26, 188, 156, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(26, 188, 156, 0); }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <div class="hero">
+        <img src="./static/cilo1.jpg" alt="منظره روستای کاپوت" class="hero-image">
+        <div class="hero-content">
+            <h1 style="font-size: 2.5rem; margin-bottom: 1rem;">افراد مشهور <span class="pulse" style="color: #f1c40f;">روستای کاپوت</span></h1>
+            <p style="font-size: 1.2rem; max-width: 700px; margin: 0 auto;">معرفی چهره‌های سرشناس و تاثیرگذار روستای کاپوت</p>
+        </div>
+    </div>
+
+    <nav>
+        <ul>
+            <li><a href="./index.html">خانه</a></li>
+            <li>
+                <a href="#">مدیریت سایت</a>
+                <ul>
+                    <li><a href="./contact.html">ارتباط با مدیر</a></li>
+                </ul>
+            </li>
+            <li><a href="./aboutus.html">درباره ما</a></li>
+        </ul>
+    </nav>
+
+    <div class="main-content">
+        <div class="page-title">
+            <h2>چهره‌های ماندگار کاپوت</h2>
+        </div>
+        
+        <div class="famous-people">
+
+            
+            <!-- شخص اول -->
+            <div class="person-card">
+                <img src="./static/manager.jpg" alt=" سیپان یوسف پور " class="person-image">
+                <div class="person-overlay"> 
+                    <div class="overlay-text">
+                        <a href="./aboutus.html"><p> <br> اطلاعات بیشتر</p>
+                        </a>
+                    </div>
+                </div>
+                <div class="person-info">
+                    <h3 class="person-name"> سیپان یوسف پور </h3>
+                    <p class="person-title">قهرمان کشتی</p>
+                    <p class="person-bio">دارنده 3 مدال طلای کشوری و نماینده استان در مسابقات بین‌المللی</p>
+                </div>
+            </div>
+            
+
+
+            <!-- شخص دوم -->
+            <div class="person-card">
+                <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt="فاطمه کریمی" class="person-image">
+                <div class="person-overlay">
+                    <div class="overlay-text">
+                        <p>مدرس دانشگاه و نویسنده 5 کتاب علمی</p>
+                    </div>
+                </div>
+                <div class="person-info">
+                    <h3 class="person-name">فاطمه کریمی</h3>
+                    <p class="person-title">استاد دانشگاه</p>
+                    <p class="person-bio">نویسنده و پژوهشگر برجسته در حوزه علوم اجتماعی</p>
+                </div>
+            </div>
+            
+            <!-- شخص سوم -->
+            <div class="person-card">
+                <img src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt="رضا احمدی" class="person-image">
+                <div class="person-overlay">
+                    <div class="overlay-text">
+                        <p>بنیانگذار اولین مدرسه در روستای کاپوت</p>
+                    </div>
+                </div>
+                <div class="person-info">
+                    <h3 class="person-name">رضا احمدی</h3>
+                    <p class="person-title">معلم نمونه</p>
+                    <p class="person-bio">مربی و معلم نمونه استان با 30 سال سابقه تدریس</p>
+                </div>
+            </div>
+            
+            <!-- شخص چهارم -->
+            <div class="person-card">
+                <img src="https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt="زهرا حسینی" class="person-image">
+                <div class="person-overlay">
+                    <div class="overlay-text">
+                        <p>برنده جایزه ملی هنرهای دستی</p>
+                    </div>
+                </div>
+                <div class="person-info">
+                    <h3 class="person-name">زهرا حسینی</h3>
+                    <p class="person-title">هنرمند صنایع دستی</p>
+                    <p class="person-bio">استاد برجسته در هنرهای سنتی و صنایع دستی محلی</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>تمامی حقوق برای وبسایت سیپان محفوظ است © ۱۴۰۳</p>
+    </footer>
+</body>
+</html>

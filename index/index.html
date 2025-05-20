@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>وبسایت سیپان - اخبار روستای کاپوت</title>
+    <style>
+        /* استایل دهی عمومی */
+        @import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;700&display=swap');
+        
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --accent-color: #16a085;
+            --text-color: #333;
+            --light-bg: #f8f9fa;
+            --card-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            --hover-effect: all 0.3s ease;
+        }
+        
+        body {
+            font-family: 'Vazirmatn', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.8;
+            margin: 0;
+            padding: 0;
+            background-color: var(--light-bg);
+            color: var(--text-color);
+        }
+
+        /* هدر */
+        .hero {
+            position: relative;
+            height: 60vh;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            margin-bottom: 2rem;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.3));
+            z-index: 1;
+        }
+        
+        .hero-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: 0;
+            transition: transform 10s ease;
+        }
+        
+        .hero:hover .hero-image {
+            transform: scale(1.05);
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+            padding: 0 2rem;
+        }
+
+        /* نوار ناوبری */
+        nav {
+            background-color: var(--primary-color);
+            padding: 1rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            transition: var(--hover-effect);
+        }
+
+        nav a:hover {
+            background-color: rgba(255,255,255,0.2);
+            transform: translateY(-2px);
+        }
+
+        /* منوی آبشاری */
+        nav ul li {
+            position: relative;
+        }
+        
+        nav ul ul {
+            display: none;
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background-color: var(--primary-color);
+            min-width: 200px;
+            border-radius: 0 0 8px 8px;
+            box-shadow: var(--card-shadow);
+            padding: 0.5rem 0;
+        }
+        
+        nav ul li:hover > ul {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+        
+        nav ul ul li {
+            padding: 0.5rem 0;
+        }
+        
+        nav ul ul a {
+            display: block;
+            padding: 0.5rem 1.5rem;
+        }
+        
+        nav ul ul a:hover {
+            background-color: rgba(255,255,255,0.1);
+        }
+
+        /* محتوای اصلی */
+        .main-content {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1.5rem;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+        }
+        
+        @media (min-width: 992px) {
+            .main-content {
+                grid-template-columns: 2fr 1fr;
+            }
+        }
+
+        /* کارت‌ها */
+        .card {
+            background-color: white;
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: var(--card-shadow);
+            transition: var(--hover-effect);
+            border: 1px solid rgba(0,0,0,0.05);
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+        }
+
+        .card img {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin: 1rem 0;
+            transition: var(--hover-effect);
+        }
+        
+        .card:hover img {
+            transform: scale(1.02);
+        }
+        
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        /* سایدبار */
+        .sidebar {
+            background-color: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: var(--card-shadow);
+            height: fit-content;
+        }
+
+        /* دکمه */
+        .btn {
+            display: inline-block;
+            padding: 0.7rem 1.5rem;
+            background-color: var(--secondary-color);
+            color: white;
+            border-radius: 8px;
+            text-decoration: none;
+            transition: var(--hover-effect);
+            font-weight: 500;
+            border: none;
+            cursor: pointer;
+            margin-top: 1rem;
+            box-shadow: 0 4px 8px rgba(52, 152, 219, 0.3);
+        }
+
+        .btn:hover {
+            background-color: #2980b9;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(52, 152, 219, 0.4);
+        }
+
+        /* متن سیپان */
+        .highlight {
+            color: #1abc9c;
+            font-weight: 700;
+            text-shadow: 0 2px 4px rgba(26, 188, 156, 0.3);
+        }
+
+        /* فوتر */
+        footer {
+            background-color: var(--primary-color);
+            color: white;
+            text-align: center;
+            padding: 2rem 1rem;
+            margin-top: 3rem;
+            position: relative;
+        }
+        
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, #1abc9c, #3498db);
+        }
+
+        /* انیمیشن‌ها */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        /* افکت‌های ویژه */
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(26, 188, 156, 0.7); }
+            70% { box-shadow: 0 0 0 10px rgba(26, 188, 156, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(26, 188, 156, 0); }
+        }
+    </style>
+</head>
+<body>
+    <div class="hero">
+        <img src="./static/cilo1.jpg" alt="منظره روستای کاپوت" class="hero-image">
+        <div class="hero-content">
+            <h1 style="font-size: 2.5rem; margin-bottom: 1rem;"> به وبسیات <span class="highlight pulse"> کاپوت رنگین </span> خوش آمدید</h1>
+            <p style="font-size: 1.2rem; max-width: 700px; margin: 0 auto;">!در اینجا شما تمام اخبارهای مربوط به روستای زیبای کاپوت را مشاهده خواهید کرد</p>
+        </div>
+    </div>
+
+    <nav>
+        <ul>
+            <li><a href="./index.html">خانه</a></li>
+            <li>
+                <a href="#">مدیریت سایت</a>
+                <ul>
+                    <li><a href="./contact.html">ارتباط با مدیر</a></li>
+                </ul>
+            </li>
+            <li><a href="./aboutus.html">درباره ما</a></li>
+            <li><a href="./people2.html"> اهالی </a></li>
+
+        </ul>
+    </nav>
+
+    <div class="main-content">
+        <div>
+            <div class="card-grid">
+                <div class="card">
+                    <h2>روستای کاپوت در ورزش</h2>
+                    <img src="./static/ronaldo.png" alt="تصویر ورزش در روستای کاپوت">
+                    <p>ما در این بخش از مقاله درباره تیم‌های فوتبال و فوتسال و دیگر فعالیت‌های ورزشی روستای کاپوت توضیح می‌دهیم.</p>
+                    <a href="./first maqala.html" class="btn">بیشتر بخوانید</a>
+                </div>
+
+                <div class="card">
+                    <h2>جاذبه‌ها و دیدنی‌های روستا</h2>
+                    <div style="display: grid; grid-template-columns: 2.5fr 0.2fr; gap: 1rem;">
+                        <img src="./static/gimgim1.jpg" alt="منظره روستای کاپوت">
+                    </div>
+                    <p>ما در این بخش می‌خواهیم شما را با جاذبه‌های گردشگری روستای کاپوت و طبیعت زیبا و سرسبز آن آشنا کنیم.</p>
+                    <a href="./jazebe ha.html" class="btn">بیشتر بخوانید</a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="sidebar">
+            <h2>مقالات دیگر</h2>
+            <div class="card">
+                <h3>اخبار روزانه روستای کاپوت</h3>
+                <p>آخرین اخبار و رویدادهای روزانه روستای کاپوت را در این بخش دنبال کنید.</p>
+                <a href="#" class="btn">بیشتر بخوانید</a>
+            </div>
+            
+            <div class="card" style="margin-top: 1.5rem;">
+                <h3>گالری تصاویر</h3>
+                <p>تصاویر زیبا از روستای کاپوت و مردم خونگرم آن</p>
+                <a href="#" class="btn">مشاهده گالری</a>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>تمامی حقوق برای وبسایت کاپوت رنگین  محفوظ است © 1404</p>
+    </footer>
+</body>
+</html>
